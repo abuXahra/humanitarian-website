@@ -1,6 +1,7 @@
 import Wrapper from "@/app/components/container-wrapper/ContainerWrapper";
 import { BLOGPOSTDATA } from "@/app/data/home/BlogPostData";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import React from "react";
 
 export default async function PostDetail({
@@ -11,6 +12,14 @@ export default async function PostDetail({
   const { slug } = await params;
 
   const post = BLOGPOSTDATA.find((data) => data.slug === slug);
+
+  if (!post) {
+    notFound();
+  }
+
+  // if (!post) {
+  //   throw new Error("Post is not found");
+  // }
 
   return (
     <div className="w-full bg-blue-100 flex flex-col pb-6">
